@@ -4,6 +4,7 @@ from pathlib import Path
 
 #from tkinter import *
 # Explicit imports to satisfy Flake8
+#Add another button that predicts the annual cost
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from PIL import Image, ImageTk
 
@@ -297,7 +298,7 @@ disconnectDatabaseButton = Button(
     image=disconnectDatabaseImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: disconnect_db(),
+    command=lambda: db.close(),
     relief="flat",
     bg="#919191",
     activebackground="#919191"

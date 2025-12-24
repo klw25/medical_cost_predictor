@@ -11,7 +11,5 @@ def connect_db():
     return mydb
 
 
-def disconnect_db():
-    global mydb
-
+def disconnect_db(mydb):
     mydb.close()

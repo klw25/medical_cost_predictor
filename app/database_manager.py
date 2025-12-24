@@ -121,4 +121,6 @@ class DatabaseManager:
         id = self.max_id()
     def close(self):
         if self.mydb:
-            disconnect_db()
+            disconnect_db(self.mydb)
+            self.mydb = None
+            self.mycursor = None
