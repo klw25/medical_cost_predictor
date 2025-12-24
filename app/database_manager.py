@@ -32,12 +32,15 @@ class DatabaseManager:
 
         for x in mycursor:
             print(x)
+        
+        mycursor.fetchall()
         mycursor.close()
 
     def update_screen(self,bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry):
         
         mycursor = self.mydb.cursor()
-        mycursor.execute("SELECT * FROM medical_cost_data", self.current_id)
+        print(f"Current ID: {self.current_id}")
+        mycursor.execute("SELECT * FROM medical_cost_data WHERE id = %s", (self.current_id,))
         self.clear(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry)
         data = mycursor.fetchone()
         bmiEntry.insert(0, data[1])
@@ -54,6 +57,7 @@ class DatabaseManager:
         insuranceCoverageEntry.insert(0, data[12])
         previousYearCostEntry.insert(0, data[13])
 
+        mycursor.fetchall()
         mycursor.close()
         
 
@@ -63,24 +67,27 @@ class DatabaseManager:
         mycursor.execute("INSERT INTO medical_cost_data (bmi, diabetes, hypertension, heart_disease, asthma, daily_steps, sleep_hours, stress_level, doctor_visits_per_year, hospital_admissions, medication_count, insurance_coverage_pct, previous_year_cost) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (bmi, diabetes, hypertension, heart_disease, asthma, daily_steps, sleep_hours, stress_level, doctor_visits_per_year, hospital_admissions, medication_count, insurance_coverage_pct, previous_year_cost))
         self.mydb.commit()
 
+        mycursor.fetchall()
         mycursor.close()
 
     def editing(self,bmi, diabetes, hypertension, heart_disease,asthma, daily_steps, sleep_hours, stress_level, doctor_visits_per_year, hospital_admissions, medication_count, insurance_coverage_pct, previous_year_cost):
         mycursor = self.mydb.cursor()
 
         sql = "UPDATE medical_cost_data SET bmi = %s, diabetes = %s, hypertension = %s, heart_disease = %s, asthma = %s, daily_steps = %s, sleep_hours = %s, stress_level = %s, doctor_visits_per_year = %s, hospital_admissions = %s, medication_count = %s, insurance_coverage_pct = %s, previous_year_cost = %s WHERE id = %s"
-        val = bmi, diabetes, hypertension, heart_disease,asthma, daily_steps, sleep_hours, stress_level, doctor_visits_per_year, hospital_admissions, medication_count, insurance_coverage_pct, previous_year_cost, self.current_id
+        val = (bmi, diabetes, hypertension, heart_disease,asthma, daily_steps, sleep_hours, stress_level, doctor_visits_per_year, hospital_admissions, medication_count, insurance_coverage_pct, previous_year_cost, self.current_id)
 
         mycursor.execute(sql, val)
         self.mydb.commit()
 
+        mycursor.fetchall()
         mycursor.close()
 
     def delete(self):
         mycursor = self.mydb.cursor()
 
-        mycursor.execute("DELETE FROM medical_cost_data WHERE id = %s", self.current_id)
+        mycursor.execute("DELETE FROM medical_cost_data WHERE id = %s", (self.current_id,))
 
+        mycursor.fetchall()
         mycursor.close()
 
     def max_id(self):        
@@ -90,23 +97,24 @@ class DatabaseManager:
 
         max_id = mycursor.fetchone()
 
+        mycursor.fetchall()
         mycursor.close()
-        return max_id
+        return max_id[0]
 
     def left1(self):
         self.current_id -= 1
-        if self.current_id < 0:
+        if self.current_id < 1:
             self.current_id += 1
     def left2(self):
         self.current_id -= 2
-        if self.current_id < 0:
+        if self.current_id < 1:
             self.current_id += 2
     def left3(self):
         self.current_id -= 3
-        if self.current_id < 0:
+        if self.current_id < 1:
             self.current_id += 3
     def leftEnd(self):
-        self.current_id = 0
+        self.current_id = 1
 
     def right1(self):
         self.current_id += 1

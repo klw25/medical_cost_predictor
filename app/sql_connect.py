@@ -15,5 +15,5 @@ def disconnect_db(mydb):
     mydb.close()
 
 def initialize_id():
-    current_id = 0
+    current_id = 1
     return current_id
