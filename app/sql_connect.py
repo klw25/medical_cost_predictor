@@ -13,3 +13,7 @@ def connect_db():
 
 def disconnect_db(mydb):
     mydb.close()
+
+def initialize_id():
+    current_id = 0
+    return current_id
