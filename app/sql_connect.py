@@ -1,7 +1,6 @@
 import mysql.connector
 
 def connect_db():
-    global mydb
 
     mydb = mysql.connector.connect(
     host="localhost",
@@ -9,8 +8,10 @@ def connect_db():
     password="030579",
     database="medical_data"
     )
+    return mydb
+
 
 def disconnect_db():
     global mydb
-    
+
     mydb.close()

@@ -16,6 +16,7 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / path
 
 
+
 window = Tk()
 
 window.geometry("1325x960")
@@ -31,6 +32,8 @@ canvas = Canvas(
     highlightthickness = 0,
     relief = "ridge"
 )
+
+db = DatabaseManager()
 
 connectToDatabaseImage = PhotoImage(file=relative_to_assets("connectToDatabase.png"))
 entry = PhotoImage(file=relative_to_assets("entry.png"))
@@ -279,7 +282,7 @@ connectToDatabaseButton = Button(
     image=connectToDatabaseImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: connect_db(),
+    command=lambda: [connect_db(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry)],
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -302,48 +305,6 @@ disconnectDatabaseButton = Button(
 disconnectDatabaseButton.place(
     x=10.0,
     y=261.0
-)
-#New Button
-newButton = Button(
-    image=newImage,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat",
-    bg="#919191",
-    activebackground="#919191"
-)
-newButton.place(
-    x=79.0,
-    y=341.0
-)
-#Edit Button
-editButton = Button(
-    image=editImage,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat",
-    bg="#919191",
-    activebackground="#919191"
-)
-editButton.place(
-    x=79.0,
-    y=430.0
-)
-#Delete Button
-deleteButton = Button(
-    image=deleteImage,
-    borderwidth=0,
-    highlightthickness=0,
-    command=lambda: print("button_1 clicked"),
-    relief="flat",
-    bg="#919191",
-    activebackground="#919191"
-)
-deleteButton.place(
-    x=79.0,
-    y=519.0
 )
 #|< Button
 leftEndButton = Button(
@@ -460,13 +421,13 @@ dailyStepsEntry.place(
     width=220.0, height=41.0
 )
 #Sleep Hours Entry
-dailyStepsEntry = Entry(
+sleepHoursEntry = Entry(
     bd=0,
     bg="#F0F0F0",
     highlightthickness=0,
     font=("Arial", 18)
 )
-dailyStepsEntry.place(
+sleepHoursEntry.place(
     x=470.000244140625, y=677.0,
     width=220.0, height=41.0
 )
@@ -526,13 +487,13 @@ insuranceCoverageEntry.place(
     width=220.0, height=41.0
 )
 #Previous Year Cost Entry
-insuranceCoverageEntry = Entry(
+previousYearCostEntry = Entry(
     bd=0,
     bg="#F0F0F0",
     highlightthickness=0,
     font=("Arial", 18)
 )
-insuranceCoverageEntry.place(
+previousYearCostEntry.place(
     x=1035.000244140625, y=599.0,
     width=220.0, height=41.0
 )
@@ -547,6 +508,50 @@ predictedAnnualMedicalCostEntry = Entry(
 predictedAnnualMedicalCostEntry.place(
     x=1101.000244140625, y=681.0,
     width=190.0, height=41.0
+)
+#New Button
+newButton = Button(
+    image=newImage,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: 
+        [db.inserting(bmiEntry.get(), diabetesEntry.get(), hypertensionEntry.get(), heartDiseaseEntry.get(), asthmaEntry.get(), dailyStepsEntry.get(), sleepHoursEntry.get(), stressLevelsEntry.get(), annualDoctorVisitsEntry.get(), hospitalAdmissionsEntry.get(), medicationCountEntry.get(), insuranceCoverageEntry.get(), previousYearCostEntry.get()), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry)],
+    relief="flat",
+    bg="#919191",
+    activebackground="#919191"
+)
+newButton.place(
+    x=79.0,
+    y=341.0
+)
+#Edit Button
+editButton = Button(
+    image=editImage,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda:
+        [db.editing(bmiEntry.get(), diabetesEntry.get(), hypertensionEntry.get(), heartDiseaseEntry.get(), asthmaEntry.get(), dailyStepsEntry.get(), sleepHoursEntry.get(), stressLevelsEntry.get(), annualDoctorVisitsEntry.get(), hospitalAdmissionsEntry.get(), medicationCountEntry.get(), insuranceCoverageEntry.get(), previousYearCostEntry.get()), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry)],
+    relief="flat",
+    bg="#919191",
+    activebackground="#919191"
+)
+editButton.place(
+    x=79.0,
+    y=430.0
+)
+#Delete Button
+deleteButton = Button(
+    image=deleteImage,
+    borderwidth=0,
+    highlightthickness=0,
+    command=lambda: print("button_1 clicked"),
+    relief="flat",
+    bg="#919191",
+    activebackground="#919191"
+)
+deleteButton.place(
+    x=79.0,
+    y=519.0
 )
 #klw25 rectangle
 canvas.create_rectangle(
