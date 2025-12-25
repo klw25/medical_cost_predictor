@@ -4,7 +4,7 @@ from pathlib import Path
 #from tkinter import *
 # Explicit imports to satisfy Flake8
 #Add another button that predicts the annual cost
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Menu
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Menu, messagebox
 from PIL import Image, ImageTk
 
 
@@ -33,12 +33,23 @@ canvas = Canvas(
     relief = "ridge"
 )
 
+def show_information_popup():
+    messagebox.showinfo("Information", "Medical Cost Predictor")
+
+def confirm_exit():
+    response = messagebox.askyesno("Exit", "Are you sure you want to quit?")
+    if response:
+        window.quit()
+
 menubar = Menu(window)
 help_menu = Menu(menubar, tearoff=0)
-help_menu.add_command(label="Undo", command=lambda: print("Undo"))
+help_menu.add_command(label="Instructions", command=lambda: show_information_popup())
 menubar.add_cascade(label="Help", menu=help_menu)
+menubar.add_command(label="Exit", command=confirm_exit)
 
 window.config(menu=menubar)
+
+
 
 db = DatabaseManager()
 
