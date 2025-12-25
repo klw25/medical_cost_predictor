@@ -28,7 +28,9 @@ class DatabaseManager:
         medicationCountEntry.delete(0, 'end')
         insuranceCoverageEntry.delete(0, 'end')
         previousYearCostEntry.delete(0, 'end')
+        predictedAnnualMedicalCostEntry.config(state='normal')
         predictedAnnualMedicalCostEntry.delete(0, 'end')
+        predictedAnnualMedicalCostEntry.config(state='readonly')
 
     def mysqlcommand(self):
         mycursor = self.mydb.cursor()
@@ -71,7 +73,9 @@ class DatabaseManager:
         medicationCountEntry.insert(0, data[11])
         insuranceCoverageEntry.insert(0, data[12])
         previousYearCostEntry.insert(0, data[13])
-        predictedAnnualMedicalCostEntry(0, data[14])
+        predictedAnnualMedicalCostEntry.config(state='normal')
+        predictedAnnualMedicalCostEntry.insert(0, data[14])
+        predictedAnnualMedicalCostEntry.config(state='readonly')
 
         mycursor.fetchall()
         mycursor.close()

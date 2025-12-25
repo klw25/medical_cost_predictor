@@ -1,11 +1,10 @@
-from sql_connect import connect_db, disconnect_db
 from database_manager import *
 from pathlib import Path
 
 #from tkinter import *
 # Explicit imports to satisfy Flake8
 #Add another button that predicts the annual cost
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Menu
 from PIL import Image, ImageTk
 
 
@@ -24,7 +23,6 @@ window.geometry("1325x960")
 window.configure(bg = "#FFFFFF")
 window.title("Medical Cost Predictor")
 
-
 canvas = Canvas(
     window,
     bg = "#FFFFFF",
@@ -34,6 +32,13 @@ canvas = Canvas(
     highlightthickness = 0,
     relief = "ridge"
 )
+
+menubar = Menu(window)
+help_menu = Menu(menubar, tearoff=0)
+help_menu.add_command(label="Undo", command=lambda: print("Undo"))
+menubar.add_cascade(label="Help", menu=help_menu)
+
+window.config(menu=menubar)
 
 db = DatabaseManager()
 
