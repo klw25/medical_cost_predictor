@@ -1,4 +1,6 @@
-# Medical Cost Predictor - Created by Kenneth Withers - klw25@fsu.edu 
+# Medical Cost Predictor
+Created by Kenneth Withers - klw25@fsu.edu  
+
 A Python-based desktop application that manages patient health records and uses Machine Learning to predict future medical expenses.
 
 ## Overview
@@ -16,10 +18,10 @@ The app is connected to a **MySQL database** to persist patient records, allowin
 
 ## Tech Stack
 * **Language:** Python 3.12+
-* **GUI:** Tkinter (CustomTkinter or Standard)
+* **GUI:** Tkinter
 * **Database:** MySQL
 * **Machine Learning:** Scikit-Learn, Pandas, NumPy
-* **Model Storage:** Joblib / Pickle
+* **Model Storage:** Joblib
 
 ## Installation & Setup
 
