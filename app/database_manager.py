@@ -93,6 +93,8 @@ class DatabaseManager:
             val = (bmi, self.yes_or_no_input(diabetes), self.yes_or_no_input(hypertension), self.yes_or_no_input(heart_disease), self.yes_or_no_input(asthma), daily_steps, sleep_hours, stress_level, doctor_visits_per_year, hospital_admissions, medication_count, insurance_coverage_pct, previous_year_cost, self.current_id)
 
             mycursor.execute(sql, val)
+            mycursor.execute("UPDATE medical_cost_data SET annual_medical_cost = NULL WHERE id = %s", (self.current_id,))
+            
             self.mydb.commit()
 
             mycursor.fetchall()
