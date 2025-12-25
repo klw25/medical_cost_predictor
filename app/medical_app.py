@@ -3,7 +3,8 @@ from pathlib import Path
 
 #from tkinter import *
 # Explicit imports to satisfy Flake8
-#Add another button that predicts the annual cost
+#Add a funciton where when a database is edited, clear the predicted medical cost
+#Add an are u sure you want to delete button
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage, Menu, messagebox
 from PIL import Image, ImageTk
 
@@ -34,7 +35,7 @@ canvas = Canvas(
 )
 
 def show_information_popup():
-    messagebox.showinfo("Information", "Medical Cost Predictor")
+    messagebox.showinfo("Information", "To create a new record, clear, type entries, then click new.\nTo delete a record, click delete.\nTo edit a new record, simply edit the record then click edit.")
 
 def confirm_exit():
     response = messagebox.askyesno("Exit", "Are you sure you want to quit?")
@@ -246,7 +247,7 @@ rightEndButton = Button(
     image=rightEndImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.rightEnd(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.rightEnd(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -260,7 +261,7 @@ right2Button = Button(
     image=right2Image,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.right2(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.right2(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -274,7 +275,7 @@ right1Button = Button(
     image=right1Image,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.right1(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.right1(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -288,7 +289,7 @@ left1Button = Button(
     image=left1Image,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.left1(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.left1(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -302,7 +303,7 @@ connectToDatabaseButton = Button(
     image=connectToDatabaseImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.open(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.open(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -317,7 +318,7 @@ disconnectDatabaseButton = Button(
     image=disconnectDatabaseImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: db.close(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry),
+    command=lambda: db.close(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text),
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -331,7 +332,7 @@ leftEndButton = Button(
     image=leftEndImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.leftEnd(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.leftEnd(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -345,7 +346,7 @@ left2Button = Button(
     image=left2Image,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.left2(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.left2(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -535,7 +536,7 @@ newButton = Button(
     borderwidth=0,
     highlightthickness=0,
     command=lambda: 
-        [db.inserting(bmiEntry.get(), diabetesEntry.get(), hypertensionEntry.get(), heartDiseaseEntry.get(), asthmaEntry.get(), dailyStepsEntry.get(), sleepHoursEntry.get(), stressLevelsEntry.get(), annualDoctorVisitsEntry.get(), hospitalAdmissionsEntry.get(), medicationCountEntry.get(), insuranceCoverageEntry.get(), previousYearCostEntry.get()), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+        [db.inserting(bmiEntry.get(), diabetesEntry.get(), hypertensionEntry.get(), heartDiseaseEntry.get(), asthmaEntry.get(), dailyStepsEntry.get(), sleepHoursEntry.get(), stressLevelsEntry.get(), annualDoctorVisitsEntry.get(), hospitalAdmissionsEntry.get(), medicationCountEntry.get(), insuranceCoverageEntry.get(), previousYearCostEntry.get()), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -550,7 +551,7 @@ editButton = Button(
     borderwidth=0,
     highlightthickness=0,
     command=lambda:
-        [db.editing(bmiEntry.get(), diabetesEntry.get(), hypertensionEntry.get(), heartDiseaseEntry.get(), asthmaEntry.get(), dailyStepsEntry.get(), sleepHoursEntry.get(), stressLevelsEntry.get(), annualDoctorVisitsEntry.get(), hospitalAdmissionsEntry.get(), medicationCountEntry.get(), insuranceCoverageEntry.get(), previousYearCostEntry.get()), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+        [db.editing(bmiEntry.get(), diabetesEntry.get(), hypertensionEntry.get(), heartDiseaseEntry.get(), asthmaEntry.get(), dailyStepsEntry.get(), sleepHoursEntry.get(), stressLevelsEntry.get(), annualDoctorVisitsEntry.get(), hospitalAdmissionsEntry.get(), medicationCountEntry.get(), insuranceCoverageEntry.get(), previousYearCostEntry.get()), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -564,7 +565,7 @@ deleteButton = Button(
     image=deleteImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.delete(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.delete(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -578,7 +579,7 @@ clearEntriesButton = Button(
     image=clearImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: db.clear(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry,predictedAnnualMedicalCostEntry),
+    command=lambda: db.clear(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry,predictedAnnualMedicalCostEntry, canvas, patient_id_text),
     relief="flat",
     bg="#919191",
     activebackground="#919191"
@@ -592,7 +593,7 @@ predictAnnualCostButton = Button(
     image=predictAnnualCostImage,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: [db.input_prediction(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry)],
+    command=lambda: [db.input_prediction(), db.update_screen(bmiEntry, diabetesEntry, hypertensionEntry, heartDiseaseEntry, asthmaEntry, dailyStepsEntry, sleepHoursEntry, stressLevelsEntry, annualDoctorVisitsEntry, hospitalAdmissionsEntry, medicationCountEntry, insuranceCoverageEntry, previousYearCostEntry, predictedAnnualMedicalCostEntry, canvas, patient_id_text)],
     relief="flat",
     bg="#FFFFFF",
     activebackground="#FFFFFF"
@@ -610,13 +611,13 @@ canvas.create_rectangle(
     fill="#D9D9D9",
     outline="")
 
-canvas.create_text(
-    55.0,
-    58.0,
+patient_id_text = canvas.create_text(
+    50.0,
+    76.0,
     anchor="nw",
-    text="Kenneth Withers\nklw25@fsu.edu",
+    text="",
     fill="#000000",
-    font=("Inter SemiBold", 20 * -1)
+    font=("Inter SemiBold", 25 * -1)
 )
 
 canvas.create_rectangle(
