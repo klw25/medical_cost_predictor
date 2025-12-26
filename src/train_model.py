@@ -5,8 +5,6 @@ from sklearn.tree import DecisionTreeRegressor
 
 import pandas as pd
 import matplotlib.pyplot as plt
-#import os 
-from pathlib import Path
 
 from get_mae import get_mae
 from data import load_data

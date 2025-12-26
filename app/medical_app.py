@@ -73,6 +73,7 @@ predictAnnualCostImage = PhotoImage(file=relative_to_assets("predictAnnualCost.p
 unresizedLogo = Image.open(relative_to_assets("image.png"))
 resizedLogo = unresizedLogo.resize((200, 200))
 logo = ImageTk.PhotoImage(resizedLogo)
+window.iconphoto(True, logo)
 
 #Left Border Rectangle
 canvas.place(x = 0, y = 0)
